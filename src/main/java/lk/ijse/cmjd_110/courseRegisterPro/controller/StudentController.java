@@ -75,6 +75,12 @@ public class StudentController {
         );
         return new  ResponseEntity<>(studentList, HttpStatus.OK);
     }
+    @PatchMapping
+    public void updateStudent(@RequestParam ("stuId") String studentId, @RequestParam String stuCity, @RequestBody UserDTO toBeUpdatedStudentDetails){
+        System.out.println("Student ID: "+studentId);
+        System.out.println("Student City: "+stuCity);
+        System.out.println("To be updated details "+toBeUpdatedStudentDetails);
+    }
 
 }
 
