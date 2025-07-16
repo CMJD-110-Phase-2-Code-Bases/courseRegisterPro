@@ -1,5 +1,6 @@
 package lk.ijse.cmjd_110.courseRegisterPro.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import java.io.Serializable;
@@ -9,7 +10,8 @@ import java.io.Serializable;
 @Data
 public class UserDTO implements Serializable {
     private String userId;
-    private String firstName;
+    @JsonProperty(value = "firstName")
+    private String name;
     private String lastName;
     private String email;
     private String addressLine1;
