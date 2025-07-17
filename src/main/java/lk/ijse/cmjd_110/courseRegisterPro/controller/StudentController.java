@@ -4,6 +4,7 @@ import lk.ijse.cmjd_110.courseRegisterPro.dto.Role;
 import lk.ijse.cmjd_110.courseRegisterPro.dto.UserDTO;
 import lk.ijse.cmjd_110.courseRegisterPro.service.StudentService;
 import lk.ijse.cmjd_110.courseRegisterPro.service.impl.StudentServiceIMPL;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -15,9 +16,19 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/student")
+@RequiredArgsConstructor
 public class StudentController {
-    @Autowired
-    private StudentService studentService;
+    //- Field injection
+//    @Autowired
+//    private StudentService studentService;
+
+    private final StudentService studentService;
+
+    //Constructor Injection
+//    public StudentController(StudentService studentService) {
+//        this.studentService = studentService;
+//    }
+
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserDTO> saveStudent(@RequestBody UserDTO userDTO){
