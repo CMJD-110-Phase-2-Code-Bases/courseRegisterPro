@@ -35,7 +35,7 @@ public class CourseMaterialController {
             String uploadTime = uploadAt != null ? uploadAt : LocalDate.now().format(DateTimeFormatter.ISO_DATE);
 
         //Step-4: Build the entire object
-            courseMaterial.setCourseId(materialId);
+            courseMaterial.setMaterialId(materialId);
             courseMaterial.setMaterialType(materialType);
             courseMaterial.setFileName(fileName);
             courseMaterial.setMaterial(base64Material);
