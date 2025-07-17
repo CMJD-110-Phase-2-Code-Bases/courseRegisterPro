@@ -2,7 +2,9 @@ package lk.ijse.cmjd_110.courseRegisterPro.controller;
 
 import lk.ijse.cmjd_110.courseRegisterPro.dto.Role;
 import lk.ijse.cmjd_110.courseRegisterPro.dto.UserDTO;
+import lk.ijse.cmjd_110.courseRegisterPro.service.StudentService;
 import lk.ijse.cmjd_110.courseRegisterPro.service.impl.StudentServiceIMPL;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,9 @@ import java.util.List;
 @RestController
 @RequestMapping("api/v1/student")
 public class StudentController {
+    @Autowired
+    private StudentService studentService;
+
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserDTO> saveStudent(@RequestBody UserDTO userDTO){
         return new ResponseEntity<>(userDTO, HttpStatus.CREATED);
@@ -21,15 +26,14 @@ public class StudentController {
     @GetMapping(value = "{studentId}",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserDTO> getSelectedStudent(@PathVariable String studentId){
         System.out.println("Student ID is "+studentId);
-        var studentServiceIMPL = new StudentServiceIMPL();
-        var selectedStudent = studentServiceIMPL.getSelectedStudent(studentId);
-
+//        var studentServiceIMPL = new StudentServiceIMPL();
+        var selectedStudent = studentService.getSelectedStudent(studentId);
         if(studentId.equals(selectedStudent.getUserId())){
-        studentServiceIMPL.getSelectedStudent(studentId);
             return new ResponseEntity<>(selectedStudent, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
+
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<UserDTO>> getAllStudent(){
         List<UserDTO> studentList = Arrays.asList(
