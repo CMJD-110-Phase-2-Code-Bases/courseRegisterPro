@@ -13,9 +13,6 @@ import java.util.List;
 @RestController
 @RequestMapping("api/v1/student")
 public class StudentController {
-     //Todo: Handle Student's details as CRUD operation
-
-    //Save Student
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserDTO> saveStudent(@RequestBody UserDTO userDTO){
         return new ResponseEntity<>(userDTO, HttpStatus.CREATED);
