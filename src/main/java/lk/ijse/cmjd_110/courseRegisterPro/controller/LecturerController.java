@@ -39,8 +39,8 @@ public class LecturerController {
     @PatchMapping
     public void updateLecturer(@RequestParam ("lecId") String lecturerId,
                               @RequestParam String lectCity, @RequestBody UserDTO toBeUpdatedLecturerDetails){
-        System.out.println("Student ID: "+lecturerId);
-        System.out.println("Student City: "+lectCity);
+        System.out.println("Lecturer ID: "+lecturerId);
+        System.out.println("Lecturer City: "+lectCity);
         System.out.println("To be updated details "+toBeUpdatedLecturerDetails);
     }
     @DeleteMapping

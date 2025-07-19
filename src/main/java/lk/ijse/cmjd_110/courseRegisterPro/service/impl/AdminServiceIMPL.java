@@ -2,80 +2,80 @@ package lk.ijse.cmjd_110.courseRegisterPro.service.impl;
 
 import lk.ijse.cmjd_110.courseRegisterPro.dto.Role;
 import lk.ijse.cmjd_110.courseRegisterPro.dto.UserDTO;
-import lk.ijse.cmjd_110.courseRegisterPro.service.LecturerService;
+import lk.ijse.cmjd_110.courseRegisterPro.service.AdminService;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
 @Service
-public class LecturerServiceIMPL implements LecturerService {
+public class AdminServiceIMPL implements AdminService {
     @Override
-    public void saveLecturer(UserDTO lecturer) {
+    public void saveAdmin(UserDTO lecturer) {
 
     }
 
     @Override
-    public UserDTO getSelectedLecturer(String lectId) throws Exception {
-        UserDTO selectedLecturer =  new UserDTO(
-                "LEC001",
-                "Kasun",
-                "Shehan",
-                "ks@example.com",
+    public UserDTO getSelectedAdmin(String adminId) throws Exception {
+        UserDTO selectedAdmin =  new UserDTO(
+                "ADM001",
+                "Nihal",
+                "Perera",
+                "np@example.com",
                 "123 Main Street",
                 "Apartment 4B",
                 "Near Central Park",
                 "New York",
                 "securePass123",
-                Role.LECTURER
+                Role.ADMIN
         );
-        if(lectId.equals(selectedLecturer.getUserId())){
-            return selectedLecturer;
+        if(adminId.equals(selectedAdmin.getUserId())){
+            return selectedAdmin;
         }
-        throw new Exception("Lecturer not found");
+        throw new Exception("Admin member not found");
     }
 
     @Override
-    public List<UserDTO> getAllLecturers() {
+    public List<UserDTO> getAllAdmins() {
         return Arrays.asList(
-                new UserDTO("LEC02", "Nimal",
+                new UserDTO("ADMIN02", "Nimal",
                         "Fernando", "nimalf@mail.com",
                         "Lake Road", "Colombo 7",
                         "Colombo", "Colombo",
-                        "abc123", Role.LECTURER),
+                        "abc123", Role.ADMIN),
 
-                new UserDTO("LEC03", "Sithara",
+                new UserDTO("ADMIN03", "Sithara",
                         "Jayasinghe", "sithara.j@mail.com",
                         "Temple Lane", "Galle Fort",
                         "Galle", "Galle",
-                        "pass456", Role.LECTURER),
+                        "pass456", Role.ADMIN),
 
-                new UserDTO("LEC04", "Ruwan",
+                new UserDTO("ADMIN04", "Ruwan",
                         "Silva", "ruwan.s@mail.com",
                         "Hill Street", "Kandy Central",
                         "Kandy", "Kandy",
-                        "kandy321", Role.LECTURER),
+                        "kandy321", Role.ADMIN),
 
-                new UserDTO("LEC05", "Dilani",
+                new UserDTO("ADMIN05", "Dilani",
                         "Hettiarachchi", "dilani.h@mail.com",
                         "Marine Drive", "Negombo North",
                         "Negombo", "Negombo",
-                        "negombo789", Role.LECTURER),
+                        "negombo789", Role.ADMIN),
 
-                new UserDTO("LEC06", "Suresh",
+                new UserDTO("ADMIN06", "Suresh",
                         "Wickramasinghe", "suresh.w@mail.com",
                         "Green Avenue", "Matara West",
                         "Matara", "Matara",
-                        "matara123", Role.LECTURER)
+                        "matara123", Role.ADMIN)
         );
     }
 
     @Override
-    public void updateLecturer(String lecturerId, UserDTO toBeUpdatedLecturer) {
+    public void updateAdmin(String lecturerId, UserDTO toBeUpdatedLecturer) {
 
     }
 
     @Override
-    public void deleteLecturer(String lecturerId) {
+    public void deleteAdmin(String lecturerId) {
 
     }
 }
