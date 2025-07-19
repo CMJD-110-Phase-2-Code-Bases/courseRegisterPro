@@ -3,6 +3,8 @@ package lk.ijse.cmjd_110.courseRegisterPro.service.impl;
 import lk.ijse.cmjd_110.courseRegisterPro.dto.Role;
 import lk.ijse.cmjd_110.courseRegisterPro.dto.UserDTO;
 import lk.ijse.cmjd_110.courseRegisterPro.service.StudentService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,8 +17,8 @@ public class StudentServiceIMPL implements StudentService {
     }
 
     @Override
-    public UserDTO getSelectedStudent(String studentId) {
-        return new UserDTO(
+    public UserDTO getSelectedStudent(String studentId) throws Exception {
+        UserDTO selectedStudent =  new UserDTO(
                 "STU001",
                 "John",
                 "Doe",
@@ -28,6 +30,10 @@ public class StudentServiceIMPL implements StudentService {
                 "securePass123",
                 Role.STUDENT
         );
+        if(studentId.equals(selectedStudent.getUserId())){
+            return selectedStudent;
+        }
+        throw new Exception("Student not found");
     }
 
     @Override

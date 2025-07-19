@@ -18,17 +18,7 @@ import java.util.List;
 @RequestMapping("api/v1/student")
 @RequiredArgsConstructor
 public class StudentController {
-    //- Field injection
-//    @Autowired
-//    private StudentService studentService;
-
     private final StudentService studentService;
-
-    //Constructor Injection
-//    public StudentController(StudentService studentService) {
-//        this.studentService = studentService;
-//    }
-
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserDTO> saveStudent(@RequestBody UserDTO userDTO){
@@ -36,13 +26,16 @@ public class StudentController {
     }
     @GetMapping(value = "{studentId}",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserDTO> getSelectedStudent(@PathVariable String studentId){
-        System.out.println("Student ID is "+studentId);
-//        var studentServiceIMPL = new StudentServiceIMPL();
-        var selectedStudent = studentService.getSelectedStudent(studentId);
-        if(studentId.equals(selectedStudent.getUserId())){
-            return new ResponseEntity<>(selectedStudent, HttpStatus.OK);
+        try {
+            var selectedStudent = new UserDTO();
+            selectedStudent = studentService.getSelectedStudent(studentId);
+            return new ResponseEntity<>(selectedStudent,HttpStatus.OK);
+        }catch (Exception ex){
+            //Todo: insert a log
+            ex.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
