@@ -1,17 +1,13 @@
-package lk.ijse.cmjd_110.courseRegisterPro.controller;
+package lk.ijse.cmjd_110.courseRegisterPro.controller.common;
 
-import lk.ijse.cmjd_110.courseRegisterPro.dto.Role;
 import lk.ijse.cmjd_110.courseRegisterPro.dto.UserDTO;
 import lk.ijse.cmjd_110.courseRegisterPro.service.StudentService;
-import lk.ijse.cmjd_110.courseRegisterPro.service.impl.StudentServiceIMPL;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.List;
 
 @RestController
