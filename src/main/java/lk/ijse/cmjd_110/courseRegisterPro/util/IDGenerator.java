@@ -13,4 +13,7 @@ public class IDGenerator {
     public static String adminIdGen(){
         return "ADM-"+ UUID.randomUUID();
     }
+    public static String courseIdGen(){
+        return "CRS-"+ UUID.randomUUID();
+    }
 }

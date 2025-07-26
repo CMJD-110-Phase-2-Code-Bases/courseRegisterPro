@@ -8,6 +8,6 @@ public interface CourseService {
     void saveCourse(CourseDTO course);
     CourseDTO getSelectedCourse(String courseId) throws Exception;
     List<CourseDTO> getAllCourses();
-    void updateCourse(String courseId,CourseDTO toBeUpdatedCourse);
-    void deleteCourse(String courseId);
+    void updateCourse(String courseId,CourseDTO toBeUpdatedCourse) throws Exception;
+    void deleteCourse(String courseId) throws Exception;
 }
