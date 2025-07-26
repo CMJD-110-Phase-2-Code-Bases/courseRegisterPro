@@ -1,8 +1,10 @@
 package lk.ijse.cmjd_110.courseRegisterPro.service.impl;
 
+import lk.ijse.cmjd_110.courseRegisterPro.dao.StudentDao;
 import lk.ijse.cmjd_110.courseRegisterPro.dto.Role;
 import lk.ijse.cmjd_110.courseRegisterPro.dto.UserDTO;
 import lk.ijse.cmjd_110.courseRegisterPro.service.StudentService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -11,10 +13,13 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class StudentServiceIMPL implements StudentService {
+    private final StudentDao studentDao;
+
     @Override
     public void saveStudent(UserDTO student) {
-
+          studentDao.save();
     }
 
     @Override
