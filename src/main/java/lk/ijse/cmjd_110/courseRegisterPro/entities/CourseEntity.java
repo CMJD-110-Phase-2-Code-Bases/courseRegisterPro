@@ -1,9 +1,6 @@
 package lk.ijse.cmjd_110.courseRegisterPro.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,6 +10,7 @@ import java.time.LocalTime;
 @NoArgsConstructor
 @Data
 @Entity
+@Table(name = "course")
 public class CourseEntity {
     @Id
     private String courseId;

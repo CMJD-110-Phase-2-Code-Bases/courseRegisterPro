@@ -1,10 +1,7 @@
 package lk.ijse.cmjd_110.courseRegisterPro.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lk.ijse.cmjd_110.courseRegisterPro.dto.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
+@Table(name = "admin")
 public class AdminEntity {
     @Id
     private String adminId;

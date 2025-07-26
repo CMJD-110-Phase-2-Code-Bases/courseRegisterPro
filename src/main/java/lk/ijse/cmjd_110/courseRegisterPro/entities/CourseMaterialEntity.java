@@ -1,9 +1,6 @@
 package lk.ijse.cmjd_110.courseRegisterPro.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import jdk.jfr.DataAmount;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,6 +11,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Data
 @Entity
+@Table(name ="course_material")
 public class CourseMaterialEntity {
     @Id
     private String materialId;
