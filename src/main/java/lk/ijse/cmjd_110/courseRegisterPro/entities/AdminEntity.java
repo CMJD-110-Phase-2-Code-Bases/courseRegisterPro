@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "admin")
 public class AdminEntity {
     @Id
-    private String adminId;
+    private String id;
     private String firstName;
     private String lastName;
     private String email;

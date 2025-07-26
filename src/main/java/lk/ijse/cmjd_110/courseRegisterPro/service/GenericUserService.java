@@ -8,6 +8,6 @@ public interface GenericUserService<T> {
     void saveUser(T lecturer);
     T getSelectedUser(String studentId) throws Exception;
     List<T> getAllUsers();
-    void updateUser(String lecturerId,T toBeUpdatedLecturer);
-    void deleteUser(String lecturerId);
+    void updateUser(String lecturerId,T toBeUpdatedLecturer) throws Exception;
+    void deleteUser(String lecturerId) throws Exception;
 }
