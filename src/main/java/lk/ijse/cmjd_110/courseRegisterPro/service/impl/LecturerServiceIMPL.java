@@ -28,7 +28,7 @@ public class LecturerServiceIMPL implements LecturerService {
                 "securePass123",
                 Role.LECTURER
         );
-        if(lectId.equals(selectedLecturer.getUserId())){
+        if(lectId.equals(selectedLecturer.getId())){
             return selectedLecturer;
         }
         throw new Exception("Lecturer not found");

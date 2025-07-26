@@ -43,15 +43,25 @@ public class StudentController {
         return new  ResponseEntity<>(studentService.getAllStudents(), HttpStatus.OK);
     }
     @PatchMapping
-    public void updateStudent(@RequestParam ("stuId") String studentId,
-                              @RequestParam String stuCity, @RequestBody UserDTO toBeUpdatedStudentDetails){
-        System.out.println("Student ID: "+studentId);
-        System.out.println("Student City: "+stuCity);
-        System.out.println("To be updated details "+toBeUpdatedStudentDetails);
+    public ResponseEntity<Void> updateStudent(@RequestParam ("id") String studentId,
+                              @RequestBody UserDTO toBeUpdatedStudentDetails){
+        try {
+            studentService.updateStudent(studentId,toBeUpdatedStudentDetails);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
-    @DeleteMapping
-    public void deleteStudent(@RequestHeader ("X-studentId") String studentId){
-        System.out.println("To be deleted ID: "+studentId);
+    @DeleteMapping("{studentId}")
+    public ResponseEntity<Void> deleteStudent(@PathVariable String studentId){
+        try {
+            studentService.deleteStudent(studentId);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }catch (Exception ex){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
 

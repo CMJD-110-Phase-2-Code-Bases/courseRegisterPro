@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -26,73 +27,47 @@ public class StudentServiceIMPL implements StudentService {
     @Override
     public void saveStudent(UserDTO student) {
         var studentEntity = conversionHandle.toStudentEntity(student);
-        studentEntity.setStudentId(IDGenerator.studentIdGen());
+        studentEntity.setId(IDGenerator.studentIdGen());
         studentDao.save(studentEntity);
     }
 
     @Override
     public UserDTO getSelectedStudent(String studentId) throws Exception {
-        UserDTO selectedStudent =  new UserDTO(
-                "STU001",
-                "John",
-                "Doe",
-                "john.doe@example.com",
-                "123 Main Street",
-                "Apartment 4B",
-                "Near Central Park",
-                "New York",
-                "securePass123",
-                Role.STUDENT
-        );
-        if(studentId.equals(selectedStudent.getUserId())){
-            return selectedStudent;
+        Optional<StudentEntity> foundStudent = studentDao.findById(studentId);
+        if(!foundStudent.isPresent()){
+            throw new Exception("Student not found");
         }
-        throw new Exception("Student not found");
+        StudentEntity selectedStudent = studentDao.getReferenceById(studentId);
+        return conversionHandle.toStudentDTO(selectedStudent);
     }
 
     @Override
     public List<UserDTO> getAllStudents() {
-        List<UserDTO> studentList = Arrays.asList(
-                new UserDTO("STU02", "Nimal",
-                        "Fernando", "nimalf@mail.com",
-                        "Lake Road", "Colombo 7",
-                        "Colombo", "Colombo",
-                        "abc123", Role.STUDENT),
-
-                new UserDTO("STU03", "Sithara",
-                        "Jayasinghe", "sithara.j@mail.com",
-                        "Temple Lane", "Galle Fort",
-                        "Galle", "Galle",
-                        "pass456", Role.STUDENT),
-
-                new UserDTO("STU04", "Ruwan",
-                        "Silva", "ruwan.s@mail.com",
-                        "Hill Street", "Kandy Central",
-                        "Kandy", "Kandy",
-                        "kandy321", Role.STUDENT),
-
-                new UserDTO("STU05", "Dilani",
-                        "Hettiarachchi", "dilani.h@mail.com",
-                        "Marine Drive", "Negombo North",
-                        "Negombo", "Negombo",
-                        "negombo789", Role.STUDENT),
-
-                new UserDTO("STU06", "Suresh",
-                        "Wickramasinghe", "suresh.w@mail.com",
-                        "Green Avenue", "Matara West",
-                        "Matara", "Matara",
-                        "matara123", Role.STUDENT)
-        );
-        return studentList;
+        return conversionHandle.getStudentDTOList(studentDao.findAll());
     }
 
     @Override
-    public void updateStudent(String studentId, UserDTO toBeUpdatedStudent) {
-
+    public void updateStudent(String studentId, UserDTO toBeUpdatedStudent) throws Exception {
+        Optional<StudentEntity> foundStudent = studentDao.findById(studentId);
+        if(!foundStudent.isPresent()){
+            throw new Exception("Student not found");
+        }
+        foundStudent.get().setCity(toBeUpdatedStudent.getCity());
+        foundStudent.get().setEmail(toBeUpdatedStudent.getEmail());
+        foundStudent.get().setFirstName(toBeUpdatedStudent.getFirstName());
+        foundStudent.get().setLastName(toBeUpdatedStudent.getLastName());
+        foundStudent.get().setAddressLine1(toBeUpdatedStudent.getAddressLine1());
+        foundStudent.get().setAddressLine2(toBeUpdatedStudent.getAddressLine2());
+        foundStudent.get().setAddressLine3(toBeUpdatedStudent.getAddressLine3());
+        foundStudent.get().setPassword(toBeUpdatedStudent.getPassword());
     }
 
     @Override
-    public void deleteStudent(String studentId) {
-
+    public void deleteStudent(String studentId) throws Exception {
+        Optional<StudentEntity> foundStudent = studentDao.findById(studentId);
+        if(!foundStudent.isPresent()){
+            throw new Exception("Student not found");
+        }
+        studentDao.deleteById(studentId);
     }
 }

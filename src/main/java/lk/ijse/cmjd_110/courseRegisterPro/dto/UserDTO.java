@@ -9,9 +9,8 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Data
 public class UserDTO implements Serializable {
-    private String userId;
-    @JsonProperty(value = "firstName")
-    private String name;
+    private String id;
+    private String firstName;
     private String lastName;
     private String email;
     private String addressLine1;

@@ -28,7 +28,7 @@ public class AdminServiceIMPL implements AdminService {
                 "securePass123",
                 Role.ADMIN
         );
-        if(adminId.equals(selectedAdmin.getUserId())){
+        if(adminId.equals(selectedAdmin.getId())){
             return selectedAdmin;
         }
         throw new Exception("Admin member not found");
