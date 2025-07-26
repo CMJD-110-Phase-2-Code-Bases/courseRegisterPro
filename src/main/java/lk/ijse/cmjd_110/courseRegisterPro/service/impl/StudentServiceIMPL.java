@@ -1,9 +1,13 @@
 package lk.ijse.cmjd_110.courseRegisterPro.service.impl;
 
+import jakarta.transaction.Transactional;
 import lk.ijse.cmjd_110.courseRegisterPro.dao.StudentDao;
 import lk.ijse.cmjd_110.courseRegisterPro.dto.Role;
 import lk.ijse.cmjd_110.courseRegisterPro.dto.UserDTO;
+import lk.ijse.cmjd_110.courseRegisterPro.entities.StudentEntity;
 import lk.ijse.cmjd_110.courseRegisterPro.service.StudentService;
+import lk.ijse.cmjd_110.courseRegisterPro.util.EntityDTOConversionHandle;
+import lk.ijse.cmjd_110.courseRegisterPro.util.IDGenerator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,12 +18,16 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class StudentServiceIMPL implements StudentService {
     private final StudentDao studentDao;
+    private final EntityDTOConversionHandle conversionHandle;
 
     @Override
     public void saveStudent(UserDTO student) {
-          studentDao.save();
+        var studentEntity = conversionHandle.toStudentEntity(student);
+        studentEntity.setStudentId(IDGenerator.studentIdGen());
+        studentDao.save(studentEntity);
     }
 
     @Override
