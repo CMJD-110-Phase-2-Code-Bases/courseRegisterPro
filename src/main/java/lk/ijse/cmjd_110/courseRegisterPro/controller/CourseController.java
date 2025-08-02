@@ -4,6 +4,9 @@ import lk.ijse.cmjd_110.courseRegisterPro.dto.CourseDTO;
 import lk.ijse.cmjd_110.courseRegisterPro.exception.CourseNotFoundException;
 import lk.ijse.cmjd_110.courseRegisterPro.service.CourseService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,8 +16,11 @@ import java.util.List;
 @RestController
 @RequestMapping("api/v1/course")
 @RequiredArgsConstructor
+@Slf4j
 public class CourseController {
     private final CourseService courseService;
+    // This is replaced via @Slf4j
+   // private final static Logger logger = LoggerFactory.getLogger(CourseController.class);
 
     @PostMapping
     public ResponseEntity<Void>saveCourse(@RequestBody CourseDTO courseDTO){
@@ -24,7 +30,10 @@ public class CourseController {
     @GetMapping("{courseId}")
     public ResponseEntity<CourseDTO> getSelectedCourse(@PathVariable String courseId) {
         try {
-            return new ResponseEntity<>(courseService.getSelectedCourse(courseId), HttpStatus.OK);
+            var selectedCourse = courseService.getSelectedCourse(courseId);
+            //ADD LOGs
+             log.info("------Get selected course as: {}",selectedCourse);
+             return new ResponseEntity<>(selectedCourse, HttpStatus.OK);
         } catch (CourseNotFoundException ex) {
             ex.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
