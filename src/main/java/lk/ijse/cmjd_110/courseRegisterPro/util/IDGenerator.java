@@ -16,4 +16,7 @@ public class IDGenerator {
     public static String courseIdGen(){
         return "CRS-"+ UUID.randomUUID();
     }
+    public static String courseMaterialIdGen(){
+        return "CMS-"+ UUID.randomUUID();
+    }
 }

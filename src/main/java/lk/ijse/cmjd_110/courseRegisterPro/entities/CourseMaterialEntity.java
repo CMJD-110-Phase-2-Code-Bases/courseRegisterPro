@@ -17,9 +17,10 @@ public class CourseMaterialEntity {
     private String materialId;
     private String fileName;
     private String materialType;
+    @Column(columnDefinition = "LONGTEXT")
     private String material;
-    private LocalDateTime uploadAt;
+    private String uploadAt;
     @ManyToOne
     @JoinColumn(name = "courseId")
-    private CourseEntity courseId;
+    private CourseEntity course;
 }
