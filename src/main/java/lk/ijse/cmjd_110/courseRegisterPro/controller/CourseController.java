@@ -31,8 +31,7 @@ public class CourseController {
     public ResponseEntity<CourseDTO> getSelectedCourse(@PathVariable String courseId) {
         try {
             var selectedCourse = courseService.getSelectedCourse(courseId);
-            //ADD LOGs
-             log.info("------Get selected course as: {}",selectedCourse);
+             log.info("Get selected course as: {}",selectedCourse);
              return new ResponseEntity<>(selectedCourse, HttpStatus.OK);
         } catch (CourseNotFoundException ex) {
             ex.printStackTrace();
