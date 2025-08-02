@@ -7,6 +7,7 @@ import lk.ijse.cmjd_110.courseRegisterPro.dto.Role;
 import lk.ijse.cmjd_110.courseRegisterPro.dto.UserDTO;
 import lk.ijse.cmjd_110.courseRegisterPro.entities.CourseEntity;
 import lk.ijse.cmjd_110.courseRegisterPro.entities.StudentEntity;
+import lk.ijse.cmjd_110.courseRegisterPro.exception.CourseNotFoundException;
 import lk.ijse.cmjd_110.courseRegisterPro.service.CourseService;
 import lk.ijse.cmjd_110.courseRegisterPro.util.EntityDTOConversionHandle;
 import lk.ijse.cmjd_110.courseRegisterPro.util.IDGenerator;
@@ -50,7 +51,7 @@ public class CourseServiceIMPL implements CourseService {
     public void updateCourse(String courseId, CourseDTO toBeUpdatedCourse) throws Exception {
         Optional<CourseEntity> foundCourse = courseDao.findById(courseId);
         if(!foundCourse.isPresent()){
-            throw new Exception("Course not found");
+            throw new CourseNotFoundException("Course not found");
         }
         foundCourse.get().setCourseName(toBeUpdatedCourse.getCourseName());
         foundCourse.get().setCourseCode(toBeUpdatedCourse.getCourseCode());
