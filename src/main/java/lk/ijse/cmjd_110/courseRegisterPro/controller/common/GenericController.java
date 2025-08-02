@@ -1,6 +1,8 @@
 package lk.ijse.cmjd_110.courseRegisterPro.controller.common;
+import lk.ijse.cmjd_110.courseRegisterPro.exception.UserNotFoundException;
 import lk.ijse.cmjd_110.courseRegisterPro.service.GenericUserService;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -21,10 +23,13 @@ public abstract class GenericController<T> {
     public ResponseEntity<T> getSelectedUser(@PathVariable String id){
         try {
             return new ResponseEntity<>(userService.getSelectedUser(id),HttpStatus.OK);
-        }catch (Exception ex){
+        }catch (UserNotFoundException ex){
             //Todo: insert a log
             ex.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -39,9 +44,12 @@ public abstract class GenericController<T> {
             userService.updateUser(id,toBeUpdatedUserDetails);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
-        }catch (Exception ex){
+        }catch (UserNotFoundException ex){
             ex.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     @DeleteMapping("{id}")
@@ -49,8 +57,10 @@ public abstract class GenericController<T> {
         try {
             userService.deleteUser(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }catch (Exception ex){
+        }catch (UserNotFoundException ex){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }catch (Exception ex){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
