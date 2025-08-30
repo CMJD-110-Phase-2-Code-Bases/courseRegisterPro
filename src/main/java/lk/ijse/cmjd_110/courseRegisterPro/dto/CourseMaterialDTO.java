@@ -18,3 +18,4 @@ public class CourseMaterialDTO implements Serializable {
     private String uploadAt;
     private String courseId;
 }
+//const [tblData,setTblData] = useState<CourseMaterialModel | null>(null)

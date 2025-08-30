@@ -24,17 +24,21 @@ public class CourseController {
 
     @PostMapping
     public ResponseEntity<Void>saveCourse(@RequestBody CourseDTO courseDTO){
+        if(courseDTO == null){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
         courseService.saveCourse(courseDTO);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
     @GetMapping("{courseId}")
     public ResponseEntity<CourseDTO> getSelectedCourse(@PathVariable String courseId) {
+
         try {
             var selectedCourse = courseService.getSelectedCourse(courseId);
              log.info("Get selected course as: {}",selectedCourse);
              return new ResponseEntity<>(selectedCourse, HttpStatus.OK);
         } catch (CourseNotFoundException ex) {
-            ex.printStackTrace();
+            log.error("Course not found {}",ex.getMessage());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } catch (Exception ex) {
             ex.printStackTrace();
