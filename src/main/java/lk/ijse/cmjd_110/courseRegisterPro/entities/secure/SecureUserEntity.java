@@ -1,8 +1,6 @@
 package lk.ijse.cmjd_110.courseRegisterPro.entities.secure;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jdk.jfr.Enabled;
 import lk.ijse.cmjd_110.courseRegisterPro.dto.Role;
 import lombok.AllArgsConstructor;
@@ -28,6 +26,7 @@ public class SecureUserEntity implements Serializable, UserDetails {
     private String lastName;
     private String email;
     private String password;
+    @Enumerated(EnumType.STRING)
     private Role role;
 
     @Override
