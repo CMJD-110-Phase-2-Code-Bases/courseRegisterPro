@@ -5,7 +5,9 @@ import lk.ijse.cmjd_110.courseRegisterPro.dao.LecturerDao;
 import lk.ijse.cmjd_110.courseRegisterPro.dto.CourseDTO;
 import lk.ijse.cmjd_110.courseRegisterPro.dto.CourseMaterialDTO;
 import lk.ijse.cmjd_110.courseRegisterPro.dto.UserDTO;
+import lk.ijse.cmjd_110.courseRegisterPro.dto.secure.SecureUserDTO;
 import lk.ijse.cmjd_110.courseRegisterPro.entities.*;
+import lk.ijse.cmjd_110.courseRegisterPro.entities.secure.SecureUserEntity;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -131,6 +133,13 @@ public class EntityDTOConversionHandle {
     public List<CourseMaterialEntity> toCourseMaterialEntityList(List<CourseMaterialDTO> dtos) {
         return dtos.stream().map(this::toCourseMaterialEntity).toList();
     }
+    //User
+     public SecureUserDTO toSecureUserDTO(SecureUserEntity secureUserEntity) {
+        return modelMapper.map(secureUserEntity, SecureUserDTO.class);
+     }
+     public SecureUserEntity toSecureUserEntity(SecureUserDTO secureUserDTO){
+        return modelMapper.map(secureUserDTO, SecureUserEntity.class);
+     }
 
 
 }
