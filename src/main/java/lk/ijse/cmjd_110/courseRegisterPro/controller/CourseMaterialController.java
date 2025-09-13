@@ -52,8 +52,8 @@ public class CourseMaterialController {
         }
     }
 
-    @DeleteMapping("{courseMaterialId}")
-    public ResponseEntity<Void> deleteCourseMaterial(@PathVariable String courseMaterialId) {
+    @DeleteMapping("{matId}")
+    public ResponseEntity<Void> deleteCourseMaterial(@PathVariable ("matId") String courseMaterialId) {
         try {
             courseMaterialService.deleteCourseMaterial(courseMaterialId);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -66,8 +66,8 @@ public class CourseMaterialController {
         }
     }
 
-    @PatchMapping("{courseMaterialId}")
-    public ResponseEntity<Void> updateCourseMaterial(@PathVariable String courseMaterialId,
+    @PatchMapping(value = "/{materialId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Void> updateCourseMaterial(@PathVariable ("materialId") String courseMaterialId,
                                                      @RequestParam String fileName,
                                                      @RequestParam String materialType,
                                                      @RequestParam MultipartFile material,
